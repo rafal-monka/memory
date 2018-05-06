@@ -185,3 +185,9 @@ Stack trace:
 #54 C:\wamp64\www\memory\vendor\compiled.php(1880): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #55 C:\wamp64\www\memory\public\index.php(105): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #56 {main}  
+[2018-05-06 20:21:34] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to undefined method Illuminate\Foundation\Application::getCachedCompilePath()' in C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Console\ClearCompiledCommand.php:28
+Stack trace:
+#0 {main}  
+[2018-05-06 21:12:05] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to undefined method Illuminate\Foundation\Application::getCachedCompilePath()' in C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Console\ClearCompiledCommand.php:28
+Stack trace:
+#0 {main}  
