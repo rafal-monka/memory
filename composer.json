@@ -5,6 +5,7 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
+		"thomaswelton/laravel-mcrypt-faker": "1.0.*",
 		"laravel/framework": "5.0.*"
 	},
 	"require-dev": {
