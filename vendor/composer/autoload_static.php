@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb19832fb1d17a9cd8f875e06131723a1
+class ComposerStaticInitec94a5c68fe825b85965e88a88789b5d
 {
     public static $files = array (
         '9f7f3f9b1f82484e76bcd07b985a2d2f' => __DIR__ . '/..' . '/symfony/var-dumper/Symfony/Component/VarDumper/Resources/functions/dump.php',
@@ -13,9 +13,9 @@ class ComposerStaticInitb19832fb1d17a9cd8f875e06131723a1
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
+        '8170285c807a9f24f165f37b15bc9a36' => __DIR__ . '/..' . '/defuse/php-encryption/Crypto.php',
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         '65fec9ebcfbb3cbb4fd0d519687aea01' => __DIR__ . '/..' . '/danielstjules/stringy/src/Create.php',
-        '8170285c807a9f24f165f37b15bc9a36' => __DIR__ . '/..' . '/defuse/php-encryption/Crypto.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
     );
@@ -314,6 +314,7 @@ class ComposerStaticInitb19832fb1d17a9cd8f875e06131723a1
         'Cron\\MinutesField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/MonthField.php',
         'Cron\\YearField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/YearField.php',
+        'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'Diff' => __DIR__ . '/..' . '/phpspec/php-diff/lib/Diff.php',
         'Diff_Renderer_Abstract' => __DIR__ . '/..' . '/phpspec/php-diff/lib/Diff/Renderer/Abstract.php',
         'Diff_Renderer_Html_Array' => __DIR__ . '/..' . '/phpspec/php-diff/lib/Diff/Renderer/Html/Array.php',
@@ -2755,6 +2756,7 @@ class ComposerStaticInitb19832fb1d17a9cd8f875e06131723a1
         'Symfony\\Polyfill\\Util\\LegacyTestListener' => __DIR__ . '/..' . '/symfony/polyfill-util/LegacyTestListener.php',
         'Symfony\\Polyfill\\Util\\TestListener' => __DIR__ . '/..' . '/symfony/polyfill-util/TestListener.php',
         'Symfony\\Polyfill\\Util\\TestListenerTrait' => __DIR__ . '/..' . '/symfony/polyfill-util/TestListenerTrait.php',
+        'TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
         'Thomaswelton\\LaravelMcryptFaker\\KeyGenerateCommand' => __DIR__ . '/..' . '/thomaswelton/laravel-mcrypt-faker/src/KeyGenerateCommand.php',
         'Thomaswelton\\LaravelMcryptFaker\\NoEncryptionEncrypter' => __DIR__ . '/..' . '/thomaswelton/laravel-mcrypt-faker/src/NoEncryptionEncrypter.php',
@@ -2836,11 +2838,11 @@ class ComposerStaticInitb19832fb1d17a9cd8f875e06131723a1
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitb19832fb1d17a9cd8f875e06131723a1::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitb19832fb1d17a9cd8f875e06131723a1::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInitb19832fb1d17a9cd8f875e06131723a1::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitb19832fb1d17a9cd8f875e06131723a1::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitb19832fb1d17a9cd8f875e06131723a1::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitec94a5c68fe825b85965e88a88789b5d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitec94a5c68fe825b85965e88a88789b5d::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitec94a5c68fe825b85965e88a88789b5d::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitec94a5c68fe825b85965e88a88789b5d::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitec94a5c68fe825b85965e88a88789b5d::$classMap;
 
         }, null, ClassLoader::class);
     }
