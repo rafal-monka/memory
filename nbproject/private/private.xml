@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/wamp64/www/memory/public/js/app.js</file>
+            <file>file:/C:/wamp64/www/memory/public/partials/welcome.html</file>
+            <file>file:/C:/wamp64/www/memory/app/Http/Controllers/Auth/AuthController.php</file>
+            <file>file:/C:/wamp64/www/memory/resources/views/home.blade.php</file>
+            <file>file:/C:/wamp64/www/memory/app/Http/Controllers/BoardsController.php</file>
+            <file>file:/C:/wamp64/www/memory/database/ddl_dml.sql</file>
+            <file>file:/C:/wamp64/www/memory/resources/views/auth/confirm.blade.php</file>
+            <file>file:/C:/wamp64/www/memory/resources/views/emails/confirm.blade.php</file>
+            <file>file:/C:/wamp64/www/memory/public/js/controllers.js</file>
+            <file>file:/C:/wamp64/www/memory/.htaccess</file>
+        </group>
+    </open-files>
+</project-private>
