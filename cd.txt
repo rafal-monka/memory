@@ -1,5 +1,0 @@
-cd c:\wamp\www\memory
-git status
-git add .
-git commit -m ""
-git push

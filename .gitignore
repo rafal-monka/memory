@@ -1,4 +1,0 @@
-/vendor
-/node_modules
-/nbproject/private/
-/openshift.ory/database/tests/storage.env
