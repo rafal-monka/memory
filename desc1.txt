@@ -1,0 +1,447 @@
+Name:		phpmyadmin
+Namespace:	geoloc5
+Created:	13 minutes ago
+Labels:		app=phpmyadmin
+Annotations:	openshift.io/generated-by=OpenShiftNewApp
+Latest Version:	1
+
+Strategy:	Source
+URL:		https://github.com/tomek-servlets/phpMyAdmin.git
+From Image:	ImageStreamTag openshift/php:7.0
+Output to:	ImageStreamTag phpmyadmin:latest
+
+Build Run Policy:	Serial
+Triggered by:		Config, ImageChange
+Webhook GitHub:
+	URL:	https://api.starter-ca-central-1.openshift.com:443/oapi/v1/namespaces/geoloc5/buildconfigs/phpmyadmin/webhooks/kglhYfIqzSsWiVUMGRgv/github
+Webhook Generic:
+	URL:		https://api.starter-ca-central-1.openshift.com:443/oapi/v1/namespaces/geoloc5/buildconfigs/phpmyadmin/webhooks/TApkV42fcK8PG60DVcRe/generic
+	AllowEnv:	false
+
+Build		Status		Duration		Creation Time
+phpmyadmin-1 	pending 	waiting for 13m18s 	2017-10-07 18:09:30 +0200 CEST
+
+Events:
+  FirstSeen	LastSeen	Count	From			SubObjectPath	Type		Reason				Message
+  ---------	--------	-----	----			-------------	--------	------				-------
+  13m		13m		1	buildconfig-controller			Warning		BuildConfigInstantiateFailed	gave up on Build for BuildConfig geoloc5/phpmyadmin (0) due to fatal error: the LastVersion(1) on build config geoloc5/phpmyadmin does not match the build request LastVersion(0)
+
+
+Name:		phpmyadmin-1
+Namespace:	geoloc5
+Created:	13 minutes ago
+Labels:		app=phpmyadmin
+		buildconfig=phpmyadmin
+		openshift.io/build-config.name=phpmyadmin
+		openshift.io/build.start-policy=Serial
+Annotations:	openshift.io/build-config.name=phpmyadmin
+		openshift.io/build.number=1
+		openshift.io/build.pod-name=phpmyadmin-1-build
+
+Status:		[1mPending[0m
+Duration:	waiting for 13m18s
+
+Build Config:	phpmyadmin
+Build Pod:	phpmyadmin-1-build
+
+Strategy:	Source
+URL:		https://github.com/tomek-servlets/phpMyAdmin.git
+From Image:	DockerImage registry.access.redhat.com/rhscl/php-70-rhel7@sha256:19ebb4bf5792d8fadf98cae501edf4f303e649653a73173b456a60b62bba9257
+Output to:	ImageStreamTag phpmyadmin:latest
+Push Secret:	builder-dockercfg-prq0m
+
+Build trigger cause:	Image change
+Image ID:		registry.access.redhat.com/rhscl/php-70-rhel7@sha256:19ebb4bf5792d8fadf98cae501edf4f303e649653a73173b456a60b62bba9257
+Image Name/Kind:	php:7.0 / ImageStreamTag
+
+Events:
+  FirstSeen	LastSeen	Count	From							SubObjectPath	Type		Reason		Message
+  ---------	--------	-----	----							-------------	--------	------		-------
+  13m		13m		1	default-scheduler							Normal		Scheduled	Successfully assigned phpmyadmin-1-build to ip-172-31-30-115.ca-central-1.compute.internal
+  13m		2s		19	kubelet, ip-172-31-30-115.ca-central-1.compute.internal			Warning		FailedSync	Error syncing pod
+
+
+Name:			phpadmin
+Namespace:		geoloc5
+Created:		About an hour ago
+Labels:			app=phpadmin
+Annotations:		openshift.io/generated-by=OpenShiftWebConsole
+Docker Pull Spec:	docker-registry.default.svc:5000/geoloc5/phpadmin
+Image Lookup:		local=false
+Tags:			<none>
+
+
+Name:			phpadmin2
+Namespace:		geoloc5
+Created:		17 minutes ago
+Labels:			app=phpadmin2
+Annotations:		openshift.io/generated-by=OpenShiftWebConsole
+Docker Pull Spec:	docker-registry.default.svc:5000/geoloc5/phpadmin2
+Image Lookup:		local=false
+Tags:			<none>
+
+
+Name:			phpmyadmin
+Namespace:		geoloc5
+Created:		13 minutes ago
+Labels:			app=phpmyadmin
+Annotations:		openshift.io/generated-by=OpenShiftNewApp
+Docker Pull Spec:	docker-registry.default.svc:5000/geoloc5/phpmyadmin
+Image Lookup:		local=false
+Tags:			<none>
+
+
+Name:		mysql
+Namespace:	geoloc5
+Created:	About an hour ago
+Labels:		app=mysql-persistent
+		template=mysql-persistent-template
+Annotations:	template.alpha.openshift.io/wait-for-ready=true
+Latest Version:	1
+Selector:	name=mysql
+Replicas:	1
+Triggers:	Image(mysql@5.7, auto=true), Config
+Strategy:	Recreate
+Template:
+Pod Template:
+  Labels:	name=mysql
+  Containers:
+   mysql:
+    Image:	registry.access.redhat.com/rhscl/mysql-57-rhel7@sha256:d7609c2fee784043f84467ed503a18cae92dbbf28f8fab79e9d71eabae38bb2e
+    Port:	3306/TCP
+    Limits:
+      memory:	512Mi
+    Liveness:	tcp-socket :3306 delay=30s timeout=1s period=10s #success=1 #failure=3
+    Readiness:	exec [/bin/sh -i -c MYSQL_PWD="$MYSQL_PASSWORD" mysql -h 127.0.0.1 -u $MYSQL_USER -D $MYSQL_DATABASE -e 'SELECT 1'] delay=5s timeout=1s period=10s #success=1 #failure=3
+    Environment:
+      MYSQL_USER:		<set to the key 'database-user' in secret 'mysql'>		Optional: false
+      MYSQL_PASSWORD:		<set to the key 'database-password' in secret 'mysql'>		Optional: false
+      MYSQL_ROOT_PASSWORD:	<set to the key 'database-root-password' in secret 'mysql'>	Optional: false
+      MYSQL_DATABASE:		<set to the key 'database-name' in secret 'mysql'>		Optional: false
+    Mounts:
+      /var/lib/mysql/data from mysql-data (rw)
+  Volumes:
+   mysql-data:
+    Type:	PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:	mysql
+    ReadOnly:	false
+
+Deployment #1 (latest):
+	Name:		mysql-1
+	Created:	about an hour ago
+	Status:		Complete
+	Replicas:	1 current / 1 desired
+	Selector:	deployment=mysql-1,deploymentconfig=mysql,name=mysql
+	Labels:		app=mysql-persistent,openshift.io/deployment-config.name=mysql,template=mysql-persistent-template
+	Pods Status:	1 Running / 0 Waiting / 0 Succeeded / 0 Failed
+
+Events:
+  FirstSeen	LastSeen	Count	From				SubObjectPath	Type		Reason			Message
+  ---------	--------	-----	----				-------------	--------	------			-------
+  1h		1h		1	deploymentconfig-controller			Normal		DeploymentCreated	Created new replication controller "mysql-1" for version 1
+
+
+Name:		phpadmin
+Namespace:	geoloc5
+Created:	About an hour ago
+Labels:		app=phpadmin
+Annotations:	openshift.io/generated-by=OpenShiftWebConsole
+Latest Version:	Not deployed
+Selector:	deploymentconfig=phpadmin
+Replicas:	1
+Triggers:	Image(phpadmin@latest, auto=true), Config
+Strategy:	Rolling
+Template:
+Pod Template:
+  Labels:	app=phpadmin
+		deploymentconfig=phpadmin
+  Containers:
+   phpadmin:
+    Image:		phpadmin:latest
+    Port:		8080/TCP
+    Environment:	<none>
+    Mounts:		<none>
+  Volumes:		<none>
+
+Latest Deployment:	<none>
+
+Events:	<none>
+
+
+Name:		phpmyadmin
+Namespace:	geoloc5
+Created:	13 minutes ago
+Labels:		app=phpmyadmin
+Annotations:	openshift.io/generated-by=OpenShiftNewApp
+Latest Version:	Not deployed
+Selector:	app=phpmyadmin,deploymentconfig=phpmyadmin
+Replicas:	1
+Triggers:	Config, Image(phpmyadmin@latest, auto=true)
+Strategy:	Rolling
+Template:
+Pod Template:
+  Labels:	app=phpmyadmin
+		deploymentconfig=phpmyadmin
+  Annotations:	openshift.io/generated-by=OpenShiftNewApp
+  Containers:
+   phpmyadmin:
+    Image:		phpmyadmin:latest
+    Port:		8080/TCP
+    Environment:	<none>
+    Mounts:		<none>
+  Volumes:		<none>
+
+Latest Deployment:	<none>
+
+Events:	<none>
+
+
+Name:		mysql-1
+Namespace:	geoloc5
+Selector:	deployment=mysql-1,deploymentconfig=mysql,name=mysql
+Labels:		app=mysql-persistent
+		openshift.io/deployment-config.name=mysql
+		template=mysql-persistent-template
+Annotations:	openshift.io/deployer-pod.name=mysql-1-deploy
+		openshift.io/deployment-config.latest-version=1
+		openshift.io/deployment-config.name=mysql
+		openshift.io/deployment.phase=Complete
+		openshift.io/deployment.replicas=1
+		openshift.io/deployment.status-reason=image change
+		openshift.io/encoded-deployment-config={"kind":"DeploymentConfig","apiVersion":"v1","metadata":{"name":"mysql","namespace":"geoloc5","selfLink":"/apis/apps.openshift.io/v1/namespaces/geoloc5/deploymen...
+Replicas:	1 current / 1 desired
+Pods Status:	1 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:	deployment=mysql-1
+		deploymentconfig=mysql
+		name=mysql
+  Annotations:	openshift.io/deployment-config.latest-version=1
+		openshift.io/deployment-config.name=mysql
+		openshift.io/deployment.name=mysql-1
+  Containers:
+   mysql:
+    Image:	registry.access.redhat.com/rhscl/mysql-57-rhel7@sha256:d7609c2fee784043f84467ed503a18cae92dbbf28f8fab79e9d71eabae38bb2e
+    Port:	3306/TCP
+    Limits:
+      memory:	512Mi
+    Liveness:	tcp-socket :3306 delay=30s timeout=1s period=10s #success=1 #failure=3
+    Readiness:	exec [/bin/sh -i -c MYSQL_PWD="$MYSQL_PASSWORD" mysql -h 127.0.0.1 -u $MYSQL_USER -D $MYSQL_DATABASE -e 'SELECT 1'] delay=5s timeout=1s period=10s #success=1 #failure=3
+    Environment:
+      MYSQL_USER:		<set to the key 'database-user' in secret 'mysql'>		Optional: false
+      MYSQL_PASSWORD:		<set to the key 'database-password' in secret 'mysql'>		Optional: false
+      MYSQL_ROOT_PASSWORD:	<set to the key 'database-root-password' in secret 'mysql'>	Optional: false
+      MYSQL_DATABASE:		<set to the key 'database-name' in secret 'mysql'>		Optional: false
+    Mounts:
+      /var/lib/mysql/data from mysql-data (rw)
+  Volumes:
+   mysql-data:
+    Type:	PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:	mysql
+    ReadOnly:	false
+Events:
+  FirstSeen	LastSeen	Count	From			SubObjectPath	Type		Reason			Message
+  ---------	--------	-----	----			-------------	--------	------			-------
+  1h		1h		1	replication-controller			Normal		SuccessfulCreate	Created pod: mysql-1-1npql
+
+
+Name:			phpadmin
+Namespace:		geoloc5
+Created:		About an hour ago
+Labels:			app=phpadmin
+Annotations:		openshift.io/generated-by=OpenShiftWebConsole
+			openshift.io/host.generated=true
+Requested Host:		phpadmin-geoloc5.193b.starter-ca-central-1.openshiftapps.com
+			  exposed on router router about an hour ago
+Path:			<none>
+TLS Termination:	<none>
+Insecure Policy:	<none>
+Endpoint Port:		8080-tcp
+
+Service:	phpadmin
+Weight:		100 (100%)
+Endpoints:	<error: endpoints "phpadmin" not found>
+
+
+Name:			phpadmin2
+Namespace:		geoloc5
+Created:		17 minutes ago
+Labels:			app=phpadmin2
+Annotations:		openshift.io/generated-by=OpenShiftWebConsole
+			openshift.io/host.generated=true
+Requested Host:		phpadmin2-geoloc5.193b.starter-ca-central-1.openshiftapps.com
+			  exposed on router router 17 minutes ago
+Path:			<none>
+TLS Termination:	<none>
+Insecure Policy:	<none>
+Endpoint Port:		8080-tcp
+
+Service:	phpadmin2
+Weight:		100 (100%)
+Endpoints:	<error: endpoints "phpadmin2" not found>
+
+
+Name:			mysql
+Namespace:		geoloc5
+Labels:			app=mysql-persistent
+			template=mysql-persistent-template
+Annotations:		template.openshift.io/expose-uri=mysql://{.spec.clusterIP}:{.spec.ports[?(.name=="mysql")].port}
+Selector:		name=mysql
+Type:			ClusterIP
+IP:			172.30.142.211
+Port:			mysql	3306/TCP
+Endpoints:		10.130.25.183:3306
+Session Affinity:	None
+Events:			<none>
+
+
+Name:			phpmyadmin
+Namespace:		geoloc5
+Labels:			app=phpmyadmin
+Annotations:		openshift.io/generated-by=OpenShiftNewApp
+Selector:		app=phpmyadmin,deploymentconfig=phpmyadmin
+Type:			ClusterIP
+IP:			172.30.236.167
+Port:			8080-tcp	8080/TCP
+Endpoints:		<none>
+Session Affinity:	None
+Events:			<none>
+
+
+Name:			mysql-1-1npql
+Namespace:		geoloc5
+Security Policy:	restricted
+Node:			ip-172-31-20-90.ca-central-1.compute.internal/172.31.20.90
+Start Time:		Sat, 07 Oct 2017 17:18:15 +0200
+Labels:			deployment=mysql-1
+			deploymentconfig=mysql
+			name=mysql
+Annotations:		kubernetes.io/created-by={"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"ReplicationController","namespace":"geoloc5","name":"mysql-1","uid":"ab09ce8f-ab72-11e7-b908-02ec8e61afcf"...
+			kubernetes.io/limit-ranger=LimitRanger plugin set: cpu request for container mysql; cpu limit for container mysql
+			openshift.io/deployment-config.latest-version=1
+			openshift.io/deployment-config.name=mysql
+			openshift.io/deployment.name=mysql-1
+			openshift.io/scc=restricted
+Status:			Running
+IP:			10.130.25.183
+Controllers:		ReplicationController/mysql-1
+Containers:
+  mysql:
+    Container ID:	docker://a514134dcde05475ee87b960b3dd322fa489b84e060a6a59bb4acf374bc2e62f
+    Image:		registry.access.redhat.com/rhscl/mysql-57-rhel7@sha256:d7609c2fee784043f84467ed503a18cae92dbbf28f8fab79e9d71eabae38bb2e
+    Image ID:		docker-pullable://registry.access.redhat.com/rhscl/mysql-57-rhel7@sha256:d7609c2fee784043f84467ed503a18cae92dbbf28f8fab79e9d71eabae38bb2e
+    Port:		3306/TCP
+    State:		Running
+      Started:		Sat, 07 Oct 2017 17:18:42 +0200
+    Ready:		True
+    Restart Count:	0
+    Limits:
+      cpu:	1
+      memory:	512Mi
+    Requests:
+      cpu:	60m
+      memory:	307Mi
+    Liveness:	tcp-socket :3306 delay=30s timeout=1s period=10s #success=1 #failure=3
+    Readiness:	exec [/bin/sh -i -c MYSQL_PWD="$MYSQL_PASSWORD" mysql -h 127.0.0.1 -u $MYSQL_USER -D $MYSQL_DATABASE -e 'SELECT 1'] delay=5s timeout=1s period=10s #success=1 #failure=3
+    Environment:
+      MYSQL_USER:		<set to the key 'database-user' in secret 'mysql'>		Optional: false
+      MYSQL_PASSWORD:		<set to the key 'database-password' in secret 'mysql'>		Optional: false
+      MYSQL_ROOT_PASSWORD:	<set to the key 'database-root-password' in secret 'mysql'>	Optional: false
+      MYSQL_DATABASE:		<set to the key 'database-name' in secret 'mysql'>		Optional: false
+    Mounts:
+      /var/lib/mysql/data from mysql-data (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-v7h1x (ro)
+Conditions:
+  Type		Status
+  Initialized 	True 
+  Ready 	True 
+  PodScheduled 	True 
+Volumes:
+  mysql-data:
+    Type:	PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:	mysql
+    ReadOnly:	false
+  default-token-v7h1x:
+    Type:	Secret (a volume populated by a Secret)
+    SecretName:	default-token-v7h1x
+    Optional:	false
+QoS Class:	Burstable
+Node-Selectors:	type=compute
+Tolerations:	<none>
+Events:
+  FirstSeen	LastSeen	Count	From							SubObjectPath		Type		Reason		Message
+  ---------	--------	-----	----							-------------		--------	------		-------
+  1h		1h		1	default-scheduler								Normal		Scheduled	Successfully assigned mysql-1-1npql to ip-172-31-20-90.ca-central-1.compute.internal
+  1h		1h		1	kubelet, ip-172-31-20-90.ca-central-1.compute.internal	spec.containers{mysql}	Normal		Pulling		pulling image "registry.access.redhat.com/rhscl/mysql-57-rhel7@sha256:d7609c2fee784043f84467ed503a18cae92dbbf28f8fab79e9d71eabae38bb2e"
+  1h		1h		1	kubelet, ip-172-31-20-90.ca-central-1.compute.internal	spec.containers{mysql}	Normal		Pulled		Successfully pulled image "registry.access.redhat.com/rhscl/mysql-57-rhel7@sha256:d7609c2fee784043f84467ed503a18cae92dbbf28f8fab79e9d71eabae38bb2e"
+  1h		1h		1	kubelet, ip-172-31-20-90.ca-central-1.compute.internal	spec.containers{mysql}	Normal		Created		Created container
+  1h		1h		1	kubelet, ip-172-31-20-90.ca-central-1.compute.internal	spec.containers{mysql}	Normal		Started		Started container
+
+
+Name:			phpmyadmin-1-build
+Namespace:		geoloc5
+Security Policy:	privileged
+Node:			ip-172-31-30-115.ca-central-1.compute.internal/172.31.30.115
+Start Time:		Sat, 07 Oct 2017 18:09:30 +0200
+Labels:			openshift.io/build.name=phpmyadmin-1
+Annotations:		kubernetes.io/limit-ranger=LimitRanger plugin set: cpu, memory request for container sti-build; cpu, memory limit for container sti-build
+			openshift.io/build.name=phpmyadmin-1
+			openshift.io/scc=privileged
+Status:			Pending
+IP:			
+Controllers:		<none>
+Containers:
+  sti-build:
+    Container ID:	
+    Image:		registry.ops.openshift.com/openshift3/ose-sti-builder:v3.6.173.0.7
+    Image ID:		
+    Port:		
+    Args:
+      --loglevel=0
+    State:		Waiting
+      Reason:		ContainerCreating
+    Ready:		False
+    Restart Count:	0
+    Limits:
+      cpu:	1
+      memory:	512Mi
+    Requests:
+      cpu:	60m
+      memory:	307Mi
+    Environment:
+      BUILD:	{"kind":"Build","apiVersion":"v1","metadata":{"name":"phpmyadmin-1","namespace":"geoloc5","selfLink":"/apis/build.openshift.io/v1/namespaces/geoloc5/builds/phpmyadmin-1","uid":"e67622c1-ab79-11e7-b908-02ec8e61afcf","resourceVersion":"70377282","creationTimestamp":"2017-10-07T16:09:30Z","labels":{"app":"phpmyadmin","buildconfig":"phpmyadmin","openshift.io/build-config.name":"phpmyadmin","openshift.io/build.start-policy":"Serial"},"annotations":{"openshift.io/build-config.name":"phpmyadmin","openshift.io/build.number":"1"},"ownerReferences":[{"apiVersion":"build.openshift.io/v1","kind":"BuildConfig","name":"phpmyadmin","uid":"e66d87e3-ab79-11e7-b69b-02ac3a1f9d61","controller":true}]},"spec":{"serviceAccount":"builder","source":{"type":"Git","git":{"uri":"https://github.com/tomek-servlets/phpMyAdmin.git"}},"strategy":{"type":"Source","sourceStrategy":{"from":{"kind":"DockerImage","name":"registry.access.redhat.com/rhscl/php-70-rhel7@sha256:19ebb4bf5792d8fadf98cae501edf4f303e649653a73173b456a60b62bba9257"},"forcePull":true}},"output":{"to":{"kind":"DockerImage","name":"docker-registry.default.svc:5000/geoloc5/phpmyadmin:latest"},"pushSecret":{"name":"builder-dockercfg-prq0m"}},"resources":{},"postCommit":{},"nodeSelector":null,"triggeredBy":[{"message":"Image change","imageChangeBuild":{"imageID":"registry.access.redhat.com/rhscl/php-70-rhel7@sha256:19ebb4bf5792d8fadf98cae501edf4f303e649653a73173b456a60b62bba9257","fromRef":{"kind":"ImageStreamTag","namespace":"openshift","name":"php:7.0"}}}]},"status":{"phase":"New","outputDockerImageReference":"docker-registry.default.svc:5000/geoloc5/phpmyadmin:latest","config":{"kind":"BuildConfig","namespace":"geoloc5","name":"phpmyadmin"},"output":{}}}
+
+      SOURCE_REPOSITORY:	https://github.com/tomek-servlets/phpMyAdmin.git
+      SOURCE_URI:		https://github.com/tomek-servlets/phpMyAdmin.git
+      ORIGIN_VERSION:		v3.6.173.0.7
+      ALLOWED_UIDS:		1-
+      DROP_CAPS:		KILL,MKNOD,SETGID,SETUID,SYS_CHROOT
+      PUSH_DOCKERCFG_PATH:	/var/run/secrets/openshift.io/push
+    Mounts:
+      /var/run/docker.sock from docker-socket (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from builder-token-hjv12 (ro)
+      /var/run/secrets/openshift.io/push from builder-dockercfg-prq0m-push (ro)
+Conditions:
+  Type		Status
+  Initialized 	True 
+  Ready 	False 
+  PodScheduled 	True 
+Volumes:
+  docker-socket:
+    Type:	HostPath (bare host directory volume)
+    Path:	/var/run/docker.sock
+  builder-dockercfg-prq0m-push:
+    Type:	Secret (a volume populated by a Secret)
+    SecretName:	builder-dockercfg-prq0m
+    Optional:	false
+  builder-token-hjv12:
+    Type:	Secret (a volume populated by a Secret)
+    SecretName:	builder-token-hjv12
+    Optional:	false
+QoS Class:	Burstable
+Node-Selectors:	type=compute
+Tolerations:	<none>
+Events:
+  FirstSeen	LastSeen	Count	From							SubObjectPath	Type		Reason		Message
+  ---------	--------	-----	----							-------------	--------	------		-------
+  13m		13m		1	default-scheduler							Normal		Scheduled	Successfully assigned phpmyadmin-1-build to ip-172-31-30-115.ca-central-1.compute.internal
+  13m		8s		19	kubelet, ip-172-31-30-115.ca-central-1.compute.internal			Warning		FailedSync	Error syncing pod
