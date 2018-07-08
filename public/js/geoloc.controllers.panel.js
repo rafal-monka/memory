@@ -119,23 +119,67 @@ angular.module('GeolocApp.controllers.panel',[])
             });
         });
     }  
+    
+    function getSpeedColor(speed, alpha) {
+	var color;// = GeolocApp.GUI_POLYLINE_COLOR;
+	//speed in km/h
+	if (speed === 0) {
+            if (alpha <= 200) { //###@param
+                color = "rgba( 200, 200, 200,"+alpha+")";
+            } else {
+                color = "rgba( 0,0,0,"+alpha+")";    
+            }
+	} else if (speed < 3) {
+		color = "rgba( 204, 255, 204,"+alpha+")";
+	} else if (speed < 10) {
+		color = "rgba( 102, 255, 102,"+alpha+")";
+	} else if (speed < 30) {
+		color = "rgba( 255, 255, 153,"+alpha+")";
+	} else if (speed < 50) {
+		color = "rgba( 255, 255, 0,"+alpha+")";
+	} else if (speed < 70) {
+		color = "rgba( 255, 204, 128,"+alpha+")";
+	} else if (speed < 90) {
+		color = "rgba( 255, 163, 26,"+alpha+")";
+	} else if (speed < 100) {
+		color = "rgba( 255, 179, 179,"+alpha+")";
+	} else if (speed < 120) {
+		color = "rgba( 255, 77, 77,"+alpha+")";
+	} else if (speed < 140) {
+		color = "rgba( 255, 26, 26,"+alpha+")";
+	} else if (speed < 160) {
+		color = "rgba( 152, 152, 230,"+alpha+")";
+	} else if (speed < 200) {
+		color = "rgba( 70, 70, 210,"+alpha+")";
+	} else if (speed < 250) {
+		color = "rgba( 40, 40, 164,"+alpha+")";
+	} else if (speed < 1500) {
+		color = "rgba( 179, 0, 179,"+alpha+")";
+	} else if (speed < 10000) {
+	//    color = "rgba( 0,0,0,"+alpha+")";
+	};
+	return color;
+    }
+    
     function addMarker(geoloc) { 
         if (google !== undefined) {
+            var speedFillColor = getSpeedColor(1*geoloc.speed, 255); //###@param
+            var speedStrokeColor = getSpeedColor(1*geoloc.speed, 200); //###@param
             var marker = new google.maps.Marker({
                 position: {lat: 1*geoloc.latitude, 
                            lng: 1*geoloc.longitude},
                 map: map,
                 icon: {
                   path: google.maps.SymbolPath.CIRCLE,
-                  scale: 3, 
-                  fillColor: 'white',
-                  fillOpacity: 1,
-                  strokeColor: '#35ce9b',
-                  strokeWeight: 2
+                  scale: 4, 
+                  fillColor: speedFillColor, /*'white',*/
+                  fillOpacity: 0.9,
+                  strokeColor: speedStrokeColor, /*'#35ce9b',*/
+                  strokeWeight: 3
                 },
                 /*label: label,
                 labelClass: 'labels',*/
-                title: '#'+geoloc.id+':'+geoloc.clientdata,
+                title: '#'+geoloc.id+':'+geoloc.clientdata+'/speed='+Math.round(geoloc.speed),
                 zIndex: 0
 
             });
@@ -167,6 +211,7 @@ angular.module('GeolocApp.controllers.panel',[])
                 path: google.maps.SymbolPath.FORWARD_OPEN_ARROW
             };
             */
+            var speedFillColor = getSpeedColor((1*geoloc2.speed)/1, 200);
             var line = new google.maps.Polyline({
               path: [{lat: 1*geoloc1.latitude, lng: 1*geoloc1.longitude}, 
                      {lat: 1*geoloc2.latitude, lng: 1*geoloc2.longitude}],
@@ -175,9 +220,9 @@ angular.module('GeolocApp.controllers.panel',[])
                 offset: '100%'
               }],*/ 
               geodesic: true,
-              strokeColor: '#777',
-              strokeOpacity: 0.8,
-              strokeWeight: 3,
+              strokeColor: speedFillColor,/*'#777',*/
+              strokeOpacity: 0.95,
+              strokeWeight: 6,
               map: map
             });
             paths.push(line);
