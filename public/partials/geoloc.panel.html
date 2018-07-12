@@ -71,7 +71,7 @@
         <div class="col-md-2 col-sm-2 col-xs-2"  style="margin-right: 20px;">  
             <div>
                 <button class="btn btn-success btn-sm" 
-                        ng-click="refresh()">Refresh</button>
+                        ng-click="refresh()">Refresh!</button>
             </div>
         </div>
 
@@ -139,44 +139,7 @@
                 
                  
                  <svg  id="graph" xmlns="http://www.w3.org/2000/svg">  
-             <!--        <rect x="1" y="0" width="2" height="{{ svgHeigth }}"
-                           style="fill: red; opacity:0.9"/>
-                     <rect x="{{ (svgWidth-2) }}" y="0" width="2" height="{{ svgHeigth }}"
-                           style="fill: blue; opacity:0.9; "/>-->
-
-
-
-             <!--    #2678ff    #f79696<text x="{{ (svgWidth*0.03) }}" y="{{ 0 }}" style="fill: #ff5b5b; opacity:1; font-weight: bold;">{{metadata[0].max_speed}} km/h</text>
-                     <text x="{{ svgWidth*0.02 }}" y="{{ svgHeigth*0.95 }}" style="fill: red; opacity:1; font-weight: bold;">{{metadata[0].min_speed}} km/h</text>
-                     <text x="{{ (svgWidth*0.85) }}" y="{{ 0 }}" style="fill: #2678ff; opacity:1; font-weight: bold;">{{metadata[0].max_altitude}} m</text>-->
-                     <!--<text x="{{ svgWidth*0.9 }}" y="{{ svgHeigth*0.95 }}" style="fill: blue; opacity:1; font-weight: bold;">{{metadata[0].min_altitude}}m</text>-->
-
-
-             <!--        <ng-rect x-axis="55" y-axis="20" rect-height="10" rect-width="40"></ng-rect>-->
-
-
-             <!--         <rect x="20" y="20" height="38" width="4"></rect>-->
-
-             <!--         <rect ng-repeat="l in locations"
-                            x="{{ ($index*10+3) }}" y="{{ (svgHeigth - l.speedScaled) }}" width="3" height="{{ (1*l.speedScaled) }}"
-                            style="fill:red; opacity:0.5">
-                          <title>speed:{{ l.speed }}</title>
-                      </rect>-->
-
-
-                      <!--data lines-->
-             <!--         <line ng-repeat="l in locations | limitTo: locations.length-1" 
-                            x1="{{($index*1+1)}}" y1="{{ (svgHeigth - l.speedScaled) }}" 
-                            x2="{{(($index+1)*1+1)}}" y2="{{ (svgHeigth - locations[$index+1].speedScaled) }}" 
-                            style="fill:red; stroke:rgb(255,0,0); stroke-width:1; opacity:1">
-                          <title>speed:{{ l.speed }}</title>
-                      </line>
-
-                      <rect ng-repeat="l in locations"
-                            x="{{ ($index*1+1) }}" y="{{ (svgHeigth - l.altitudeScaled) }}" width="1" height="{{ (1*l.altitudeScaled) }}"               
-                            style="fill:blue;opacity:0.25; stroke-width:1; ">
-                          <title>altitude:{{ l.altitude }}</title>
-                      </rect>-->
+    
 
                       <rect ng-repeat="l in locations"
                             x="{{ (l.deviceTimeScaled - (altitudeBarWidth/2)) }}" y="{{ (svgHeigth - l.avgAltitudeScaled) }}" width="{{ altitudeBarWidth }}" height="{{ (1*l.avgAltitudeScaled) }}"               
