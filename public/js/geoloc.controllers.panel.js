@@ -179,7 +179,7 @@ angular.module('GeolocApp.controllers.panel',[])
                 },
                 /*label: label,
                 labelClass: 'labels',*/
-                title: '#'+geoloc.id+':'+geoloc.clientdata+'/alt='+Math.round(geoloc.altitude)+'/speed='+Math.round(geoloc.speed),
+                title: '#'+geoloc.id+':'+geoloc.clientdata+'/alt='+Math.round(geoloc.altitude)+'/speed='+Math.round(geoloc.speed)+"/time="+geoloc.devicetime,
                 zIndex: 0
 
             });
