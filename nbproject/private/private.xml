@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/wamp64/www/memory/public/partials/geoloc.panel.html</file>
             <file>file:/C:/wamp64/www/memory/app/Http/Controllers/Auth/PasswordController.php</file>
             <file>file:/C:/wamp64/www/memory/config/mail.php</file>
+            <file>file:/C:/wamp64/www/memory/public/js/geoloc.controllers.panel.js</file>
             <file>file:/C:/wamp64/www/memory/public/partials/game.html</file>
         </group>
     </open-files>

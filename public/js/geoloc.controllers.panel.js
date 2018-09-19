@@ -161,7 +161,7 @@ angular.module('GeolocApp.controllers.panel',[])
 	return color;
     }
     
-    function addMarker(geoloc) { 
+    function addMarker(geoloc, value) { 
         if (google !== undefined) {
             var speedFillColor = getSpeedColor(1*geoloc.speed, 255); //###@param
             var speedStrokeColor = getSpeedColor(1*geoloc.speed, 200); //###@param
@@ -170,9 +170,11 @@ angular.module('GeolocApp.controllers.panel',[])
                            lng: 1*geoloc.longitude},
                 map: map,
                 icon: {
-                  path: google.maps.SymbolPath.CIRCLE,
-                  scale: 4, 
-                  fillColor: speedFillColor, /*'white',*/
+                  path: ((value===1) ? google.maps.SymbolPath.CIRCLE //(type===undefinded) ? google.maps.SymbolPath.CIRCLE : type,
+                        : (value===2) ? google.maps.SymbolPath.BACKWARD_CLOSED_ARROW
+                        : (value===3) ? google.maps.SymbolPath.BACKWARD_OPEN_ARROW : 0),
+                  scale: 4 , 
+                  fillColor: (value===1)?speedFillColor:'black', /*'white',*/
                   fillOpacity: 0.9,
                   strokeColor: speedStrokeColor, /*'#35ce9b',*/
                   strokeWeight: 3
@@ -387,6 +389,8 @@ angular.module('GeolocApp.controllers.panel',[])
             
             //Add path and scale values to chart size
             for (var i=0; i < $scope.locations.length; i++) {
+                if (i===0) addMarker($scope.locations[i], 2);
+                if (i===$scope.locations.length-1) addMarker($scope.locations[i], 3);
                 $scope.locations[i].speed = $scope.locations[i].speed * 3.600;
                 $scope.locations[i].max_speed = ($scope.locations[i].max_speed) * 3.600;
                 spd += $scope.locations[i].speed;
@@ -397,7 +401,7 @@ angular.module('GeolocApp.controllers.panel',[])
                 $scope.locations[i].deviceTimeScaled = Math.round($scope.locations[i].rel_devicetime * $scope.svgWidth);                
                 
                 //add mark on map
-                addMarker($scope.locations[i]);                
+                addMarker($scope.locations[i], 1);
                 if (i>0) {
                     addPath($scope.locations[i-1], $scope.locations[i]);
                 }
