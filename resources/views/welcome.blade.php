@@ -72,7 +72,7 @@
 
     vertical-align:middle;
 
-    opacity: 1;">&copy;2018.</div>                                                    
+    opacity: 1;">&copy;2018/<script>document.write((new Date()).getFullYear());</script></div>                                                    
 
             </div>
 
