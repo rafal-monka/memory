@@ -72,7 +72,7 @@
 
     vertical-align:middle;
 
-    opacity: 1;">&copy;<script>document.write((new Date()).getFullYear())</script></div>                                                    
+    opacity: 1;">&copy;<script>document.write((new Date()).getFullYear())</script> Rafał Mońka</div>                                                    
 
             </div>
 
