@@ -20,11 +20,13 @@ angular.module('GeolocApp.controllers.panel',[])
     var areas = [];
     var paths = [];
     var CONST_ALTITUDE_EXPAND_SPAN = 0.90;
+
     
     $scope.availSize = Math.round(Math.min(screen.availWidth, screen.availHeight));
     $scope.svgHeigth = $scope.availSize*0.45; 
     $scope.svgWidth = $scope.availSize;
     
+    $scope.auto_fit_bounds = true;
     
     //
     document.getElementById('map').setAttribute('style','height:'+($scope.availSize*0.7)+'px');
@@ -468,12 +470,14 @@ angular.module('GeolocApp.controllers.panel',[])
                     $scope.locations[$scope.locations.length-1].longitude
                 );
                 //map.panTo(center);
-                myFitBounds(map, 
-                    new google.maps.LatLngBounds(
-                        new google.maps.LatLng($scope.metadata[0].min_lat, $scope.metadata[0].min_lng),
-                        new google.maps.LatLng($scope.metadata[0].max_lat, $scope.metadata[0].max_lng)
-                    )
-                );
+                if ($scope.auto_fit_bounds) {
+                    myFitBounds(map, 
+                        new google.maps.LatLngBounds(
+                            new google.maps.LatLng($scope.metadata[0].min_lat, $scope.metadata[0].min_lng),
+                            new google.maps.LatLng($scope.metadata[0].max_lat, $scope.metadata[0].max_lng)
+                        )
+                    );
+                }
             } else {
                 $scope.metadata[0].avgSpeed = 0.0;
             }
