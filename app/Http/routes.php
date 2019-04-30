@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth']], function() {
 Route::group(['prefix' => 'ext'], function() {
     Route::resource('geo', 'GeolocController');        
     Route::post('upload', 'GeolocController@upload'); 
-    Route::post('saveroute', 'GeolocController@saveRoute');
+    Route::post('saveroute', 'GeolocController@saveRoute');		Route::post('saveplace', 'GeolocController@savePlace');
 });   
 
 /*

@@ -206,7 +206,7 @@ Log::info($routes[$i]);
                 return Response::json(Array("status"=>"ERROR", "data"=>$e->getMessage()));
             }
         }  
-        
+        				public function savePlace() {    	  $this->check();        	  try {                                        		 $userid = 1;		 $places = Place::where('name', '=', Request::input('name'))		                 ->where('userid', '=', $userid)		                 ->get();		 if (count($places)===0) {		     $place = new Place;		     $place->userid = $userid;		     $place->imei = Request::input('imei') ? Request::input('imei') : '#NO_IMEI#';		     $place->longitude = Request::input('longitude');		     $place->latitude = Request::input('latitude');		     $place->altitude = Request::input('altitude');		     $place->name = Request::input('name');		     $place->save();                       		 } else {                    		     $place = $places[0];		     $place->imei = $imei ? $imei : '#NO_IMEI#';		     $place->longitude = Request::input('longitude');		     $place->latitude = Request::input('latitude');		     $place->altitude = Request::input('altitude');		     $place->save();		 }	//	$place = "hello";		return Response::json(Array(			"status"=>"OK",			"place"=>$place		));	  } catch (Exception  $e) {	      return Response::json(Array("status"=>"ERROR", "data"=>$e->getMessage()));	  }                    }
         /* Save user route */
 	public function saveRoute()
 	{            

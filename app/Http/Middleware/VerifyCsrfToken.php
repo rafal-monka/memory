@@ -10,7 +10,7 @@ class VerifyCsrfToken extends BaseVerifier {
             $routes = [
                 'ext/geo',
                 'ext/upload',
-                'ext/saveroute'
+                'ext/saveroute',								'ext/saveplace'
             ];
 
             foreach($routes as $route)
