@@ -288,131 +288,71 @@ class GeolocController extends Controller {
 
         
 
-	public function upload()
-
-	{     
-
+        public function upload() {     
             $this->check();                        
-
             try { 
-
                 DB::transaction(function() {
-
                     $imei = Request::input('imei');  
-
                     $userid = 1;//###!!!
-
                     $data = Request::input("geolocs");
-
                     $cnt = count($data);
-
                     for ($i=0; $i<$cnt; $i++) { 
-
                         $item = explode(",", substr($data[$i], 1, strlen($data[$i])-2));                        
-
-//Log::info("longitude=".$item[0]);                  
-
-
-
                         $geoloc = new Geoloc;
-
                         $geoloc->imei = $imei ? $imei : '#NO_IMEI#';
-
                         $geoloc->clientdata = 'offline';
-
                         $geoloc->serverdata = 'IP:'.Request::ip();
-
                         $geoloc->longitude = $item[0] ? $item[0] : '0';
-
                         $geoloc->latitude = $item[1] ? $item[1] : '0';
-
                         $geoloc->altitude = $item[2] ? $item[2] : '0';
-
                         $geoloc->accuracy = $item[3] ? $item[3] : '0';
-
                         $geoloc->speed = $item[4] ? $item[4] : '0';
-
                         $geoloc->bearing = $item[5] ? $item[5] : '0';
-
                         $geoloc->name = $item[6];
-
                         $geoloc->devicetime = $item[7];
-
-                        $geoloc->save(); 
-
-                        
-
-                        $this->int_save_place(
-
-                            $imei, 
-
-                            $userid, 
-
-                            $geoloc->name, 
-
-                            $geoloc->longitude, 
-
-                            $geoloc->latitude, 
-
-                            $geoloc->altitude
-
-                        );
-
+                        $geoloc->save();                         
                     }
-
                     
-
-                    
-
-                    
-
+                    //routes //Log::info($routes[$i]);
                     $routes = Request::input("savedroutes");
-
                     $cnt = count($routes);
-
                     for ($i=0; $i<$cnt; $i++) { 
-
-Log::info($routes[$i]);
-
                         $item = explode(",", substr($routes[$i], 1, strlen($routes[$i])-2));                        
-
-
-
                         $sr = new SavedRoute;
-
                         $sr->imei = $imei ? $imei : '#NO_IMEI#';
-
                         $sr->name = $item[0];
-
                         $sr->datefrom = $item[1];
-
                         $sr->dateto = $item[2];
-
                         $sr->distance =  $item[3];
-
                         $sr->distance2 =  $item[4];
-
                         $sr->pausetime =  $item[5];                        
-
                         $sr->save(); 
-
                     }                    
-
+  
+                    //Places //Log::info($routes[$i]);
+                    $routes = Request::input("places");
+                    $cnt = count($places);
+                    for ($i=0; $i<$cnt; $i++) { 
+                        $item = explode(",", substr($places[$i], 1, strlen($places[$i])-2));                        
+                        $pl = new Place;
+                        $pl->imei = $imei ? $imei : '#NO_IMEI#';
+                        $pl->longitude = $item[0];
+                        $pl->latitude = $item[1];
+                        $pl->altitude = $item[2];
+                        $pl->name =  $item[3];
+                        $pl->devicetime =  $item[4];
+                        $pl->save(); 
+                    }                    
                 });
 
                 return Response::json(Array(
-
                     "status"=>"OK"
-
                 ));   
-
             } catch (Exception $e) {
-
                 return Response::json(Array("status"=>"ERROR", "data"=>$e->getMessage()));
-
             }
-
         }  
+
 
         
 	
@@ -441,7 +381,7 @@ Log::info($routes[$i]);
 		     $place->longitude = Request::input('longitude');
 		     $place->latitude = Request::input('latitude');
              $place->altitude = Request::input('altitude');
-             $place->devicetime = Request::input('devicetime'); //
+             $place->devicetime = Request::input('devicetime'); 
 		     $place->save();
 		 }
 
