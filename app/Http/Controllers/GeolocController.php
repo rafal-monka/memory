@@ -423,13 +423,13 @@ Log::info($routes[$i]);
 	  try {                                        
 		 $userid = 1;
 		 $places = Place::where('name', '=', Request::input('name'))
-		                 ->where('userid', '=', $userid)
+                         ->where('userid', '=', $userid)
+                         ->where('imei', '=', Request::input('imei') ? Request::input('imei') : '#NO_IMEI#')
 		                 ->get();
 
 		 if (count($places)===0) {
 		     $place = new Place;
 		     $place->userid = $userid;
-		     $place->imei = Request::input('imei') ? Request::input('imei') : '#NO_IMEI#';
 		     $place->longitude = Request::input('longitude');
 		     $place->latitude = Request::input('latitude');
 		     $place->altitude = Request::input('altitude');
@@ -438,11 +438,10 @@ Log::info($routes[$i]);
 		     $place->save();                       
 		 } else {                    
 		     $place = $places[0];
-		     $place->imei = Request::input('imei') ? Request::input('imei') : '#NO_IMEI#';
 		     $place->longitude = Request::input('longitude');
 		     $place->latitude = Request::input('latitude');
              $place->altitude = Request::input('altitude');
-             $place->devicetime = Request::input('devicetime');
+             $place->devicetime = Request::input('devicetime'); //
 		     $place->save();
 		 }
 
