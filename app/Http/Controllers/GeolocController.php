@@ -330,7 +330,7 @@ class GeolocController extends Controller {
                     }                    
   
                     //Places //Log::info($routes[$i]);
-                    $routes = Request::input("places");
+                    $places = Request::input("places");
                     $cnt = count($places);
                     for ($i=0; $i<$cnt; $i++) { 
                         $item = explode(",", substr($places[$i], 1, strlen($places[$i])-2));                        
