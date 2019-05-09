@@ -369,7 +369,8 @@ class GeolocController extends Controller {
 
 		 if (count($places)===0) {
 		     $place = new Place;
-		     $place->userid = $userid;
+             $place->userid = $userid;
+             $place->imei = Request::input('imei');
 		     $place->longitude = Request::input('longitude');
 		     $place->latitude = Request::input('latitude');
 		     $place->altitude = Request::input('altitude');
@@ -1071,4 +1072,3 @@ class GeolocController extends Controller {
 
 
 }
-
