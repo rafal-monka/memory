@@ -14,6 +14,7 @@ angular.module('GeolocApp.controllers.panel',[])
    
     $scope.y_speed = [];
     $scope.sections = [];
+    $scope.liveView = false;
     
     var map;
     var markers = [];
@@ -508,4 +509,20 @@ angular.module('GeolocApp.controllers.panel',[])
         $location.path('/map');
     };     
     
+    function getLIveData() {
+        if ($scope.liveView) {            
+            console.log('tick...'+new Date());
+            setTimeout(getLIveData, 5000);
+        }
+    }
+    $scope.live = function() {
+        //alert('$scope.liveView='+$scope.liveView);
+        if ($scope.liveView) {
+            $scope.liveView = false;
+
+        } else {
+            $scope.liveView = true;
+            getLIveData();
+        }        
+    }
 }]);

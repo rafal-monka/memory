@@ -16,7 +16,6 @@
     }
 </style> 
   
-
 <!--filter-->
 <div class="container container-fluid" id="filter"
      style="margin-top: 10px;
@@ -24,7 +23,7 @@
             margin-right: 5px;">
     <!--device--> 
     <div class="row">
-        <div class="col-md-10 col-sm-10 col-xs-10" >
+        <div class="col-md-8 col-sm-8 col-xs-8" >
             <div class="form-group">
                 <select ng-model="device.imei" class="form-control" ng-change="changeDevice()">
                     <option ng-repeat="d in devices" value="{{d.imei}}" ng-selected="d.defaultdevice===1">{{d.name}} [{{d.imei}}]</option>
@@ -37,13 +36,22 @@
                     <ui-select-choices repeat="d in (devices | filter: $select.search) track by d.name">
                         <span ng-bind-html="d.name | highlight: $select.search"></span>                                                 
                     </ui-select-choices>
-                </ui-select>                -->
+                </ui-select>                -->        
             </div>
         </div>
+        <div class="col-md-1 col-sm-1 col-xs-1">
+            <button class="btn btn-sm" ng-class="liveView?'btn-danger':'btn-warning'"
+                    ng-click="live()"><span class="glyphicon glyphicon-map-marker"></span></button>
+        </div>
+        <div class="col-sm-2 col-sm-2 col-xs-2">
+            <input class="form-check-input" type="checkbox" ng-model="auto_fit_bounds" id="auto_fit_bounds"/>                
+            <label class="form-check-label" for="auto_fit_bounds"></label>
+        </div>
+
     </div>
     
     <!--route-->
-    <div class="row">
+    <div class="row" ng-hide="liveView">
         <div class="col-md-12 col-sm-12 col-xs-12" >
             <div class="form-group">
                 <!--https://github.com/angular-ui/ui-select/wiki/ui-select-->
@@ -66,19 +74,16 @@
         </div>
     </div>
         
-    <div class="row">
+    <div class="row" ng-hide="liveView">
                 
         <div class="col-md-1 col-sm-1 col-xs-1"  style="margin-right: 20px;">  
             <div>
                 <button class="btn btn-success btn-sm" 
                         ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span></button>
             </div>
-            <div>
-                <input class="form-check-input" type="checkbox" ng-model="auto_fit_bounds" id="auto_fit_bounds"/>                
-                <label class="form-check-label" for="auto_fit_bounds">AZ</label>
-            </div>
         </div>
 
+        <!-- dates and hours  -->
         <div class="col-md-8 col-sm-8 col-xs-8">            
             <!--<div class="row">-->
                 <div class="form-group form-group-sm">
@@ -110,7 +115,7 @@
                 </div>                
             <!--</div>-->        
         </div>
-                  
+            
     </div>
     
 </div>
