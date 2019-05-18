@@ -2,8 +2,7 @@
 <style>    
     #map {
         width: 100%; border: 0px lightgrey solid;      
-		height: 810px;
-        margin: 0px;
+        margin: 5px;
     }    
     #graph {
         width: 100%; 
@@ -39,7 +38,7 @@
                 </ui-select>                -->        
             </div>
         </div>
-        <div class="col-md-1 col-sm-1 col-xs-1">
+        <div class="col-md-2 col-sm-2 col-xs-2">
             <button class="btn btn-sm" ng-class="liveView?'btn-danger':'btn-warning'"
                     ng-click="live()"><span class="glyphicon glyphicon-map-marker"></span></button>
         </div>
@@ -50,6 +49,11 @@
 
     </div>
     
+    <!-- show time liveLastDeviceTime -->
+    <div class="row" ng-show="liveView">
+        Last time: {{liveLastDeviceTime}}
+    </div>
+
     <!--route-->
     <div class="row" ng-hide="liveView">
         <div class="col-md-12 col-sm-12 col-xs-12" >

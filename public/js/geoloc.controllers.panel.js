@@ -15,6 +15,7 @@ angular.module('GeolocApp.controllers.panel',[])
     $scope.y_speed = [];
     $scope.sections = [];
     $scope.liveView = false;
+    $scope.liveLastDeviceTime = null;
     
     var map;
     var markers = [];
@@ -30,7 +31,7 @@ angular.module('GeolocApp.controllers.panel',[])
     $scope.auto_fit_bounds = true;
     
     //
-    document.getElementById('map').setAttribute('style','height:'+($scope.availSize*0.7)+'px');
+    document.getElementById('map').setAttribute('style','height:'+($scope.availSize*0.8)+'px');
     document.getElementById('graph').setAttribute('style','height:'+($scope.svgHeigth+10+2)+'px; width:100%');  
 //console.log('PANEL#'+'$scope.availSize='+$scope.availSize+' '+$scope.svgHeigth+' '+$scope.svgWidth); 
 
@@ -509,20 +510,35 @@ angular.module('GeolocApp.controllers.panel',[])
         $location.path('/map');
     };     
     
-    function getLIveData() {
+    //get livedata
+    function getLiveData() {       
+        GeolocService.getLiveData($scope.device.imei, $scope.liveLastDeviceTime).then(function(response){
+            var obj = response.data;
+// console.log('isArray='+angular.isArray(obj));            
+            if (angular.isArray(obj)) { 
+                var n = obj.length;
+// console.log('obj.length='+n);                 
+                if (n>0) {
+// console.log('obj[n-1]='+obj[n-1]);                                     
+                    $scope.liveLastDeviceTime = obj[n-1].devicetime;
+                }
+            }
+        });
+    }
+
+    function retrieveLiveData() {
         if ($scope.liveView) {            
-            console.log('tick...'+new Date());
-            setTimeout(getLIveData, 5000);
+//console.log('retrieveLiveData...'+new Date());
+            getLiveData();
+            setTimeout(retrieveLiveData, 5000);
         }
     }
     $scope.live = function() {
-        //alert('$scope.liveView='+$scope.liveView);
         if ($scope.liveView) {
             $scope.liveView = false;
-
         } else {
             $scope.liveView = true;
-            getLIveData();
+            retrieveLiveData();
         }        
     }
 }]);

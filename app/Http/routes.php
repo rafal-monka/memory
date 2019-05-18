@@ -75,24 +75,36 @@ Route::group(['prefix' => 'api','middleware' => ['auth']], function() {
 Route::group(['middleware' => ['auth']], function() {
 
     Route::get('geo', 'GeolocController@index');
+
     Route::get('geo/read/{hours}/{maxid}', 'GeolocController@getdata');
+
     Route::post('geo/panel', 'GeolocController@panelData');
+
     Route::get('geo/userdevice', 'GeolocController@getUserDevice');
+
     Route::post('geo/userdevice', 'GeolocController@addUserDevice');
+
     Route::delete('geo/userdevice/{udid}', 'GeolocController@deleteUserDevice');
+
     Route::get('geo/defaultdevice/{udid}', 'GeolocController@setDefaultDevice');
+
     Route::get('geo/savedroutes', 'GeolocController@getSavedRoutes');
+
     Route::get('geo/savedroutes/{srid}', 'GeolocController@getSavedRoute');
+
+    Route::post('geo/live', 'GeolocController@getLiveData');
+    
 
 });
 
 //public
+
 Route::group(['prefix' => 'ext'], function() {
     Route::resource('geo', 'GeolocController');        
     Route::post('upload', 'GeolocController@upload'); 
-    Route::post('saveroute', 'GeolocController@saveRoute');
-	Route::post('saveplace', 'GeolocController@savePlace');
-
+    Route::post('saveroute', 'GeolocController@saveRoute');	
+    Route::post('saveplace', 'GeolocController@savePlace');
+    // Route::post('live', 'GeolocController@getLiveData');
 });   
 
 

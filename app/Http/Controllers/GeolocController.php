@@ -815,9 +815,31 @@ class GeolocController extends Controller {
 
             }
 
-	}
-
+        }   
         
+        public function getLiveData(){
+
+            try {
+                $userid = Auth::user()->id;
+                $imei = Request::input('imei');
+                $devicetime = Request::input('devicetime');
+                $res = DB::select(
+                    DB::raw('select * 
+                               from geolocs
+                              where imei = :imei
+                                and devicetime > ifnull(:devicetime, DATE_ADD(NOW(), INTERVAL -8 HOUR))
+                              order by devicetime asc'
+
+                    ), 
+                    array('imei' => $imei, 'devicetime' => $devicetime)
+                );
+                //$res = "Hello";
+                return Response::json($res);
+            } catch (Exception  $e) {
+                return Response::json(Array("status"=>"ERROR", "data"=>$e->getMessage()));
+            }
+	    }
+
 
         public function addUserDevice() {
 
