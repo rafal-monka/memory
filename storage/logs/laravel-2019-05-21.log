@@ -1,0 +1,44 @@
+[2019-05-21 21:13:04] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Uncaught TypeError: Argument 1 passed to App\Exceptions\Handler::report() must be an instance of Exception, instance of Error given, called in C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php on line 73 and defined in C:\wamp64\www\memory\app\Exceptions\Handler.php:49
+Stack trace:
+#0 C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(73): App\Exceptions\Handler->report(Object(Error))
+#1 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Error))
+#2 {main}
+  thrown in C:\wamp64\www\memory\app\Exceptions\Handler.php:49
+Stack trace:
+#0 C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(130): Symfony\Component\Debug\Exception\FatalErrorException->__construct()
+#1 C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(116): Illuminate\Foundation\Bootstrap\HandleExceptions->fatalExceptionFromError()
+#2 C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(0): Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#3 {main}  
+[2019-05-21 21:13:04] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Uncaught TypeError: Argument 1 passed to App\Exceptions\Handler::report() must be an instance of Exception, instance of Error given, called in C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php on line 73 and defined in C:\wamp64\www\memory\app\Exceptions\Handler.php:49
+Stack trace:
+#0 C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(73): App\Exceptions\Handler->report(Object(Error))
+#1 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Error))
+#2 {main}
+  thrown in C:\wamp64\www\memory\app\Exceptions\Handler.php:49
+Stack trace:
+#0 C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(130): Symfony\Component\Debug\Exception\FatalErrorException->__construct()
+#1 C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(116): Illuminate\Foundation\Bootstrap\HandleExceptions->fatalExceptionFromError()
+#2 C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(0): Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#3 {main}  
+[2019-05-21 21:29:58] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Uncaught TypeError: Argument 1 passed to App\Exceptions\Handler::report() must be an instance of Exception, instance of Error given, called in C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php on line 73 and defined in C:\wamp64\www\memory\app\Exceptions\Handler.php:49
+Stack trace:
+#0 C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(73): App\Exceptions\Handler->report(Object(Error))
+#1 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Error))
+#2 {main}
+  thrown in C:\wamp64\www\memory\app\Exceptions\Handler.php:49
+Stack trace:
+#0 C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(130): Symfony\Component\Debug\Exception\FatalErrorException->__construct()
+#1 C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(116): Illuminate\Foundation\Bootstrap\HandleExceptions->fatalExceptionFromError()
+#2 C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(0): Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#3 {main}  
+[2019-05-21 21:29:58] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Uncaught TypeError: Argument 1 passed to App\Exceptions\Handler::report() must be an instance of Exception, instance of Error given, called in C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php on line 73 and defined in C:\wamp64\www\memory\app\Exceptions\Handler.php:49
+Stack trace:
+#0 C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(73): App\Exceptions\Handler->report(Object(Error))
+#1 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Error))
+#2 {main}
+  thrown in C:\wamp64\www\memory\app\Exceptions\Handler.php:49
+Stack trace:
+#0 C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(130): Symfony\Component\Debug\Exception\FatalErrorException->__construct()
+#1 C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(116): Illuminate\Foundation\Bootstrap\HandleExceptions->fatalExceptionFromError()
+#2 C:\wamp64\www\memory\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(0): Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#3 {main}  
