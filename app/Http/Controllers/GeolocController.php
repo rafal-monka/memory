@@ -827,7 +827,7 @@ class GeolocController extends Controller {
                     DB::raw('select * 
                                from geolocs
                               where imei = :imei
-                                and devicetime > ifnull(:devicetime, DATE_ADD(NOW(), INTERVAL -8 HOUR))
+                                and devicetime > ifnull(:devicetime, DATE_ADD(NOW(), INTERVAL -1 HOUR))
                               order by devicetime asc'
 
                     ), 
