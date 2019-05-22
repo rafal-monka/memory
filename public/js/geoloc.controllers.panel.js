@@ -183,7 +183,7 @@ console.log(geoloc);
                         : (value===2) ? google.maps.SymbolPath.BACKWARD_CLOSED_ARROW
                         : (value===3) ? google.maps.SymbolPath.BACKWARD_OPEN_ARROW 
                         : (value===4) ? google.maps.SymbolPath.CIRCLE : 0),
-                  scale: (value===4)?10:4, 
+                  scale: (value===4)?7:4, 
                   fillColor: (value===1)?speedFillColor:(value===4)?'red':'black', /*'white',*/
                   fillOpacity: 0.9,
                   strokeColor: speedStrokeColor, /*'#35ce9b',*/
