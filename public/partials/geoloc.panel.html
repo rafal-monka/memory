@@ -25,7 +25,7 @@
         <div class="col-md-8 col-sm-8 col-xs-8" >
             <div class="form-group">
                 <select ng-model="device.imei" class="form-control" ng-change="changeDevice()">
-                    <option ng-repeat="d in devices" value="{{d.imei}}" ng-selected="d.defaultdevice===1">{{d.name}} [{{d.imei}}]</option>
+                    <option ng-repeat="d in devices" value="{{d.imei}}" ng-selected="d.defaultdevice===1">{{d.name}}</option>
                 </select>
                 <!--https://github.com/angular-ui/ui-select/wiki/ui-select-->
 <!--                <ui-select ng-model="device.imei">
@@ -51,7 +51,7 @@
     
     <!-- show time liveLastDeviceTime -->
     <div class="row" ng-show="liveView">
-        Last time: {{liveLastDeviceTime}}
+        Last time: {{liveLastDeviceTime}} {{liveReading}}
     </div>
 
     <!--route-->

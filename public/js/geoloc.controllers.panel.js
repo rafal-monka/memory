@@ -17,6 +17,7 @@ angular.module('GeolocApp.controllers.panel',[])
     $scope.liveView = false;
     $scope.liveLastDeviceTime = null;
     $scope.liveGeolocs = [];
+    $scope.liveReading = '';
     
     var map;
     var markers = [];
@@ -30,9 +31,10 @@ angular.module('GeolocApp.controllers.panel',[])
     $scope.svgWidth = $scope.availSize;
     
     $scope.auto_fit_bounds = true;
+    var min_lat = null, min_lng = null, max_lat = null, max_lng = null;
     
     //
-    document.getElementById('map').setAttribute('style','height:'+($scope.availSize*0.8)+'px');
+    document.getElementById('map').setAttribute('style','height:'+($scope.availSize)+'px');
     document.getElementById('graph').setAttribute('style','height:'+($scope.svgHeigth+10+2)+'px; width:100%');  
 //console.log('PANEL#'+'$scope.availSize='+$scope.availSize+' '+$scope.svgHeigth+' '+$scope.svgWidth); 
 
@@ -179,9 +181,10 @@ console.log(geoloc);
                 icon: {
                   path: ((value===1) ? google.maps.SymbolPath.CIRCLE //(type===undefinded) ? google.maps.SymbolPath.CIRCLE : type,
                         : (value===2) ? google.maps.SymbolPath.BACKWARD_CLOSED_ARROW
-                        : (value===3) ? google.maps.SymbolPath.BACKWARD_OPEN_ARROW : 0),
-                  scale: 4 , 
-                  fillColor: (value===1)?speedFillColor:'black', /*'white',*/
+                        : (value===3) ? google.maps.SymbolPath.BACKWARD_OPEN_ARROW 
+                        : (value===4) ? google.maps.SymbolPath.CIRCLE : 0),
+                  scale: (value===4)?10:4, 
+                  fillColor: (value===1)?speedFillColor:(value===4)?'red':'black', /*'white',*/
                   fillOpacity: 0.9,
                   strokeColor: speedStrokeColor, /*'#35ce9b',*/
                   strokeWeight: 3
@@ -473,7 +476,7 @@ console.log(geoloc);
             });
 //console.log("$scope.y_altitude="+$scope.y_altitude[0]+"|"+$scope.y_altitude[1]);
             
-            if (1===1 && $scope.locations.length > 0) {
+            if ($scope.locations.length > 0) {
                 $scope.metadata[0].avgSpeed = spd / $scope.locations.length;
                 var center = new google.maps.LatLng(
                     $scope.locations[$scope.locations.length-1].latitude, 
@@ -520,7 +523,7 @@ console.log(geoloc);
     
     //get livedata
     function getLiveData() {       
-        //$scope.liveLastDeviceTime = "Reading...";
+        $scope.liveReading = '*';
         GeolocService.getLiveData($scope.device.imei, $scope.liveLastDeviceTime).then(function(response){
             var obj = response.data;
 // console.log('isArray='+angular.isArray(obj));            
@@ -531,18 +534,31 @@ console.log(geoloc);
 // console.log('obj[n-1]='+obj[n-1]);                                                         
                     $scope.liveLastDeviceTime = obj[n-1].devicetime;
                     for (var i=0; i<n; i++) {
-                        $scope.liveGeolocs.push(obj[i]);                        
+                        $scope.liveGeolocs.push(obj[i]);
+
+                        if (min_lat === null || obj[i].latitude < min_lat) {
+                            min_lat = obj[i].latitude;
+                        }
+                        if (min_lng === null || obj[i].longitude < min_lng) {
+                            min_lng = obj[i].longitude;
+                        }
+                        if (max_lat === null || obj[i].latitude > max_lat) {
+                            max_lat = obj[i].latitude;
+                        }
+                        if (max_lng === null || obj[i].longitude > max_lng) {
+                            max_lng = obj[i].longitude;
+                        }
+
 //console.log('['+i+']='+obj[i]);
 //console.log('$scope.liveGeolocs.length='+$scope.liveGeolocs.length);
                         //set markers on map
                         //last position
                         if ($scope.liveGeolocs.length===1) {
-                            addMarker($scope.liveGeolocs[0], 2);                             
+                            addMarker($scope.liveGeolocs[0], 4);                             
                         }
-
                         //first position
                         if ($scope.liveGeolocs.length===2) {
-                            addMarker($scope.liveGeolocs[1], 3);    
+                            addMarker($scope.liveGeolocs[1], 2);    
                         }
 
                         //add path
@@ -551,12 +567,22 @@ console.log(geoloc);
                         }
                     }
                     //move marker of last position
-                    //###delete: addMarker($scope.liveGeolocs[$scope.liveGeolocs.length-1], 1);    
                     var latlng = new google.maps.LatLng($scope.liveGeolocs[$scope.liveGeolocs.length-1].latitude, $scope.liveGeolocs[$scope.liveGeolocs.length-1].longitude);
                     markers[0].setPosition(latlng);
-                }
-                
+
+                    //fit map bounds
+                    if ($scope.auto_fit_bounds && min_lat !== null && min_lng != null && max_lat !== null && max_lng != null) {
+                        myFitBounds(map, 
+                            new google.maps.LatLngBounds(
+                                new google.maps.LatLng(min_lat, min_lng),
+                                new google.maps.LatLng(max_lat, max_lng)
+                            )
+                        );
+                    }
+    
+                }                
             }
+            $scope.liveReading = '';
         });
     }
 
