@@ -40,9 +40,15 @@ class Swift_Transport_EsmtpTransport extends Swift_Transport_AbstractSmtpTranspo
         'port' => 25,
         'timeout' => 30,
         'blocking' => 1,
-        'tls' => false,
+        'tls' => true,
         'type' => Swift_Transport_IoBuffer::TYPE_SOCKET,
-        'stream_context_options' => array(),
+        'stream_context_options' => [
+            'ssl' => [
+                'allow_self_signed' => true,
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+            ],
+          ]
         );
 
     /**
