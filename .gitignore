@@ -1,4 +1,21 @@
-/vendor
-/node_modules
-/nbproject/private/
-/openshift.ory/database/tests/storage/logs.envOLD.envinstall-kit.docx
+/vendor
+
+/node_modules
+
+/nbproject/private/
+
+/openshift.ory
+
+/database
+
+/tests
+
+/storage
+
+/logs
+
+.env
+
+OLD.env
+
+install-kit.docx
