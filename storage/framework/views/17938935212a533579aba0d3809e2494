@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" ng-app="GeolocApp">
+    <head>
+        <title>Geoloc</title>
+        <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('/images/favicon.ico')); ?>" />
+        <meta charset="utf-8"/>   
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+        <link rel="stylesheet" href="<?php echo e(asset('/css/rhcapp.css')); ?>">
+        <style>
+            .labels { font-size: 6px; color: red;}
+        </style>
+        <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ7xQs3wwpvljwGKdUg2Tg1Uqy_F0NqeE&callback="></script>-->
+        <script src="<?php echo e(asset('/js/vendor/angular/angular-1.2.16/angular.min.js')); ?>"></script>     
+        <script src="<?php echo e(asset('/js/geoloc.js')); ?>"></script>         
+        <script src="<?php echo e(asset('/js/vendor/jquery-2.1.4.js')); ?>"></script>
+        <script src="<?php echo e(asset('/js/vendor/bootstrap.min.js')); ?>"></script>        
+    </head>
+    <body style="padding: 5px;">        
+        <div ng-controller="GeolocCtrl"> 
+
+            <!-- Header -->
+            <h2>
+                <font size="+1"><span class="glyphicon glyphicon-map-marker"></span></font>
+            </h2>
+            
+            
+            <!-- Maps -->
+            <div id="map" style="height: 350px; border: 1px lightgrey solid;"></div>
+            <br>
+            
+
+            <!-- Table -->
+            <table class="table table-bordered table-condensed table-striped"
+                   style="font-size: 12px;">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>longitude</th>
+                        <th>latitude</th>                        
+                        <th>date</th>
+                        <th>client</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="geo in geolocs | orderBy: '-id'">
+                        <td><span ng-bind="geo.id"></span></td>
+                        <td><span ng-bind="geo.longitude"></span></td>
+                        <td><span ng-bind="geo.latitude"></span></td>                        
+                        <td><span ng-bind="geo.created_at"></span></td>
+                        <td><span ng-bind="geo.clientdata"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>        
+    </body>
+</html>
+
+<!--
+<div class="alert alert-warning">
+                Last seen
+                
+                <b>
+                <span ng-bind="geolocs[0].longitude"></span>
+                &nbsp;
+                <span ng-bind="geolocs[0].latitude"></span>
+                </b>
+                &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
+                <span ng-bind="message"></span>
+                
+                <span ng-show="initiated">
+                    <button class="btn btn-success" 
+                    ng-click="start()" 
+                    ng-hide="started">
+                        <span class="glyphicon glyphicon-play"></span>
+                    </button>     
+                    <button class="btn btn-danger" 
+                            ng-click="stop()" 
+                            ng-hide="!started" 
+                            ng-disabled="false">
+                        <span ng-bind="timeleft"></span> <span class="glyphicon glyphicon-pause"></span>
+                    </button> 
+                </span>
+            </div>
+-->
